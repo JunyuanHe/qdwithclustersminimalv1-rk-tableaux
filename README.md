@@ -14,6 +14,8 @@ loading, testing, and convergence studies.
 
 </div>
 
+---
+
 This repository contains **exported explicit Runge-Kutta tableaux** from the research project:
 
 `Low Stage High Order Explicit Runge--Kutta Methods via Q- and D-Conditions: General Theory and Efficient Recursive Construction`
