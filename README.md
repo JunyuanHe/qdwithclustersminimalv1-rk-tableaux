@@ -406,6 +406,5 @@ This repository provides exported explicit RK tableaux plus minimal fixed-step e
 - stiffness handling
 - the original optimization / construction pipeline
 
-It also does not yet include standalone adaptive-step example code, even though adaptive control may be part of the broader research framework described in the paper.
+It also does not yet include standalone adaptive-step example code, even though adaptive control will be part of the broader research framework described in the paper.
 
-If you need those features, use these tableaux as coefficients inside your own solver framework.
