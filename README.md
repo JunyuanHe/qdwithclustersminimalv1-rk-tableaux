@@ -35,7 +35,7 @@ Typical use cases:
 
 ## What Problem This Repository Solves
 
-The original RK construction workflow is separate and heavier than what many downstream users need. In practice, many users only want the final Butcher tableau and a minimal way to run it:
+The original RK construction workflow is separate from this repository. Here the focus is much narrower: most users only need the final Butcher tableau and a minimal way to run it:
 
 - stage matrix `A`
 - weight vector `b`
@@ -109,7 +109,7 @@ Use `csv` if:
 
 - you want a human-readable format
 - you want easier interoperability with non-Julia code
-- you want explicit control over how coefficients are parsed, such as `Float64` or `BigFloat`
+- you want explicit control over how coefficients are parsed, such as `Float64`, `BigFloat`, or `Double64`
 
 Use `jld2` if:
 
@@ -220,6 +220,8 @@ store coefficients as `DoubleFloats.DoubleFloat{Float64}`.
 
 If such a file is used and `DoubleFloats` is missing, the script will automatically install and load `DoubleFloats`.
 
+The same automatic handling also applies when you use `csv` files with `--precision=Double64`.
+
 This applies to both:
 
 - [`scripts/use_exported_rk_tableau.jl`](scripts/use_exported_rk_tableau.jl)
@@ -304,6 +306,8 @@ The `metadata` dictionary typically contains:
 - `date`
 
 ## Minimal Julia Usage
+
+The examples below are intentionally minimal and show the basic file formats only. The provided scripts in [`scripts/use_exported_rk_tableau.jl`](scripts/use_exported_rk_tableau.jl) and [`scripts/convergence_test_exported_rk_tableau.jl`](scripts/convergence_test_exported_rk_tableau.jl) contain more robust type handling, conversion logic, and automatic package loading.
 
 ### Load from CSV
 
