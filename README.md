@@ -150,8 +150,8 @@ u_{n+1} = u_n + h \sum_{i=1}^s b_i k_i
 
 This repository includes a self-contained Julia example:
 
-- [`scripts/use_exported_rk_tableau.jl`](../scripts/use_exported_rk_tableau.jl)
-- [`scripts/convergence_test_exported_rk_tableau.jl`](../scripts/convergence_test_exported_rk_tableau.jl)
+- [`scripts/use_exported_rk_tableau.jl`](scripts/use_exported_rk_tableau.jl)
+- [`scripts/convergence_test_exported_rk_tableau.jl`](scripts/convergence_test_exported_rk_tableau.jl)
 
 It does not depend on the original construction code. It can:
 
@@ -163,16 +163,27 @@ It does not depend on the original construction code. It can:
 Example:
 
 ```bash
-julia scripts/use_exported_rk_tableau.jl --input=QDWithClustersMinimalV1_p8_s14_bigfloat512.csv --precision=BigFloat --prec=512 --k=4 --tfinal=1.0
+julia scripts/use_exported_rk_tableau.jl --input="standard methods/csv/QDWithClustersMinimalV1_p8_s14_bigfloat512.csv" --precision=BigFloat --prec=512 --k=4 --tfinal=1.0
 ```
 
 or
 
 ```bash
-julia scripts/use_exported_rk_tableau.jl --input=QDWithClustersMinimalV1_p8_s14_bigfloat512.jld2 --k=4 --tfinal=1.0
+julia scripts/use_exported_rk_tableau.jl --input="standard methods/jld2/QDWithClustersMinimalV1_p8_s14_bigfloat512.jld2" --precision=BigFloat --prec=512 --k=4 --tfinal=1.0
 ```
 
 Here `--k=4` means `h = 2^{-4} = 1/16`. The script also accepts `--h=2^-4`.
+
+Notes:
+
+- run the commands from the repository root
+- `--input` must be written as `--input=...`
+- because the folder name contains a space (`standard methods`), quote the path as shown above
+- if you want to use `Float64`, choose a file whose coefficients were exported for that precision, for example:
+
+```bash
+julia scripts/use_exported_rk_tableau.jl --input="optimized methods/optimized_rk_p8_s14_double64_trial2.jld2" --precision=Float64 --k=4 --tfinal=1.0
+```
 
 The example solves:
 
@@ -185,7 +196,7 @@ and compares the numerical result with the exact solution `u(t)=e^{-t}`.
 For a small convergence test over `k = 2:8`, run:
 
 ```bash
-julia scripts/convergence_test_exported_rk_tableau.jl --input=QDWithClustersMinimalV1_p8_s14_bigfloat512.csv --precision=BigFloat --prec=512 --k-range=2:8 --tfinal=1.0
+julia scripts/convergence_test_exported_rk_tableau.jl --input="standard methods/csv/QDWithClustersMinimalV1_p8_s14_bigfloat512.csv" --precision=BigFloat --prec=512 --k-range=2:8 --tfinal=1.0
 ```
 
 It prints a table with:
@@ -255,7 +266,7 @@ For JLD2 usage:
 
 - Julia package `JLD2`
 
-The standalone script [`scripts/use_exported_rk_tableau.jl`](../scripts/use_exported_rk_tableau.jl) will automatically install `JLD2` on first use if it is missing.
+The standalone script [`scripts/use_exported_rk_tableau.jl`](scripts/use_exported_rk_tableau.jl) will automatically install `JLD2` on first use if it is missing.
 
 If you prefer to install it manually:
 
