@@ -1,8 +1,18 @@
+<div align="center">
+
 # QDWithClustersMinimalV1 RK Tableaux
 
-> **Ready-to-use exported explicit RK tableaux for smooth, nonstiff ODEs.**
->
-> This repository is useful if you need **low-stage, high-order, and very-high-order methods**, plus **small Julia scripts** for direct loading, testing, and convergence studies.
+[![Methods](https://img.shields.io/badge/method-explicit_Runge--Kutta-1f6feb)](#method-range)
+[![Problem class](https://img.shields.io/badge/problem-nonstiff_ODEs-238636)](#typical-use-cases)
+[![Formats](https://img.shields.io/badge/formats-csv_%7C_jld2-8250df)](#which-file-should-you-use)
+[![Language](https://img.shields.io/badge/scripts-Julia-f37726)](#quick-start)
+
+**Ready-to-use exported explicit RK tableaux for smooth, nonstiff ODEs**
+
+Low-stage, high-order, and very-high-order methods with lightweight Julia scripts for
+loading, testing, and convergence studies.
+
+</div>
 
 This repository contains **exported explicit Runge-Kutta tableaux** from the research project:
 
@@ -20,6 +30,15 @@ Use this repository if you want **precomputed low-stage, high-order, and very-hi
 | Included | `csv`, `jld2`, single-run script, convergence script |
 | Not included | Full solver package, standalone adaptive examples, stiffness-oriented features |
 
+## Highlights
+
+- **Order range:** standard exported methods from **order 4** up to **order 20**
+- **Formats:** both **human-readable CSV** and **Julia-native JLD2**
+- **Scripts included:** one for **single-run testing**, one for **convergence studies**
+- **High-precision support:** `BigFloat`, `Double64`, and stored Julia-side numeric types
+
+## Method Range
+
 The **standard exported methods currently included here** have the following order-stage pairs:
 
 - order 4 with 4 stages
@@ -32,7 +51,7 @@ The **standard exported methods currently included here** have the following ord
 - order 18 with 74 stages
 - order 20 with 92 stages
 
-**Typical use cases:**
+## Typical Use Cases
 
 - extremely high-accuracy time integration of smooth, nonstiff ODEs
 - time discretization matched to high-order spatial schemes
@@ -94,6 +113,14 @@ The corresponding CSV file is also available:
 ```bash
 julia scripts/use_exported_rk_tableau.jl --input="optimized methods/csv/optimized_rk_p8_s14_double64_trial2.csv" --precision=Double64 --k=4 --tfinal=1.0
 ```
+
+<details>
+<summary><strong>What do these scripts do?</strong></summary>
+
+- `scripts/use_exported_rk_tableau.jl` loads one tableau and runs a fixed-step test solve for `u' = -u`
+- `scripts/convergence_test_exported_rk_tableau.jl` repeats the solve over `h = 2^{-k}` and reports errors and observed rates
+
+</details>
 
 ## Repository Layout
 
@@ -317,7 +344,8 @@ The `metadata` dictionary typically contains:
 - `precision`
 - `date`
 
-## Minimal Julia Usage
+<details>
+<summary><strong>Minimal Julia Usage</strong></summary>
 
 The examples below are intentionally minimal and show the basic file formats only. The provided scripts in [`scripts/use_exported_rk_tableau.jl`](scripts/use_exported_rk_tableau.jl) and [`scripts/convergence_test_exported_rk_tableau.jl`](scripts/convergence_test_exported_rk_tableau.jl) contain more robust type handling, conversion logic, and automatic package loading.
 
@@ -358,6 +386,8 @@ b = data["b"]
 c = data["c"]
 metadata = data["metadata"]
 ```
+
+</details>
 
 ## Using the Tableaux in Your Own Code
 
