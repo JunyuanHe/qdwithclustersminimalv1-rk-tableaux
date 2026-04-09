@@ -36,15 +36,24 @@ function print_error_table(T::Type, ks, errors)
     end
 end
 
-function main(args)
+function run_main(args)
     options = parse_kv_args(args)
     input = get(options, "input", "")
     isempty(input) && error("Missing --input=path/to/tableau.csv or .jld2")
 
-    precision_name = get(options, "precision", "BigFloat")
-    T = precision_name == "Float64" ? Float64 :
-        precision_name == "BigFloat" ? BigFloat :
-        error("Unsupported precision: $precision_name. Use Float64 or BigFloat.")
+    raw_tableau = if endswith(lowercase(input), ".csv")
+        csv_default_type = parse_precision(options)
+        if csv_default_type == BigFloat
+            precision_bits = parse(Int, get(options, "prec", "256"))
+            setprecision(BigFloat, precision_bits)
+        end
+        load_rk_tableau_csv(input, csv_default_type)
+    else
+        load_rk_tableau_jld2(input)
+    end
+
+    inferred_type = coefficient_type(raw_tableau)
+    T = parse_precision(options; default = inferred_type)
 
     if T == BigFloat
         precision_bits = parse(Int, get(options, "prec", "256"))
@@ -55,7 +64,7 @@ function main(args)
     tfinal = parse_number(T, get(options, "tfinal", "1.0"))
     u0 = parse_number(T, get(options, "u0", "1.0"))
 
-    tableau = load_rk_tableau(input; T = T)
+    tableau = convert_tableau_type(raw_tableau, T)
     A, b, c = tableau.A, tableau.b, tableau.c
 
     values = Vector{T}(undef, length(ks))
@@ -88,6 +97,11 @@ function main(args)
     println("u_num     = ", values[end])
     println("u_exact   = ", exacts[end])
     println("abs error = ", errors[end])
+end
+
+function main(args)
+    bootstrap_runtime_dependencies(args)
+    return Base.invokelatest(run_main, args)
 end
 
 if abspath(PROGRAM_FILE) == @__FILE__
