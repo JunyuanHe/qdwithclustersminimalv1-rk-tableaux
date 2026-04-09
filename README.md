@@ -34,7 +34,7 @@ Use this repository if you want **precomputed low-stage, high-order, and very-hi
 
 ## Highlights
 
-- **Order range:** standard exported methods from **order 4** up to **order 20**
+- **Order range:** standard exported methods from **order 4** up to **order 14**
 - **Formats:** both **human-readable CSV** and **Julia-native JLD2**
 - **Scripts included:** one for **single-run testing**, one for **convergence studies**
 - **High-precision support:** `BigFloat`, `Double64`, and stored Julia-side numeric types
@@ -49,9 +49,7 @@ The **standard exported methods currently included here** have the following ord
 - order 10 with 22 stages
 - order 12 with 32 stages
 - order 14 with 44 stages
-- order 16 with 58 stages
-- order 18 with 74 stages
-- order 20 with 92 stages
+- 
 
 ## Typical Use Cases
 
