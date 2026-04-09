@@ -1,5 +1,9 @@
 # QDWithClustersMinimalV1 RK Tableaux
 
+> **Ready-to-use exported explicit RK tableaux for smooth, nonstiff ODEs.**
+>
+> This repository is useful if you need **low-stage, high-order, and very-high-order methods**, plus **small Julia scripts** for direct loading, testing, and convergence studies.
+
 This repository contains **exported explicit Runge-Kutta tableaux** from the research project:
 
 `Low Stage High Order Explicit Runge--Kutta Methods via Q- and D-Conditions: General Theory and Efficient Recursive Construction`
@@ -7,6 +11,14 @@ This repository contains **exported explicit Runge-Kutta tableaux** from the res
 It is a data-and-usage repository: the paper is still in preparation, but the exported tableaux, file formats, and example scripts are already usable.
 
 Use this repository if you want **precomputed low-stage, high-order, and very-high-order explicit RK methods** for **smooth, nonstiff ODE initial value problems**, and you mainly need the final Butcher tableau data `A`, `b`, `c` plus a minimal Julia workflow to load and test them.
+
+| At a glance | |
+|---|---|
+| Methods | Exported explicit RK tableaux |
+| Strength | Low stage count with high to very high order |
+| Best for | Smooth, nonstiff ODE initial value problems |
+| Included | `csv`, `jld2`, single-run script, convergence script |
+| Not included | Full solver package, standalone adaptive examples, stiffness-oriented features |
 
 The **standard exported methods currently included here** have the following order-stage pairs:
 
@@ -51,25 +63,25 @@ This repository packages those results in reusable files and includes standalone
 
 Run all commands from the repository root.
 
-### 1. Test a standard exported method from CSV
+### Standard CSV
 
 ```bash
 julia scripts/use_exported_rk_tableau.jl --input="standard methods/csv/QDWithClustersMinimalV1_p8_s14_bigfloat512.csv" --precision=BigFloat --prec=512 --k=4 --tfinal=1.0
 ```
 
-### 2. Test a standard exported method from JLD2
+### Standard JLD2
 
 ```bash
 julia scripts/use_exported_rk_tableau.jl --input="standard methods/jld2/QDWithClustersMinimalV1_p8_s14_bigfloat512.jld2" --precision=BigFloat --prec=512 --k=4 --tfinal=1.0
 ```
 
-### 3. Run a convergence test
+### Convergence Test
 
 ```bash
 julia scripts/convergence_test_exported_rk_tableau.jl --input="standard methods/csv/QDWithClustersMinimalV1_p8_s14_bigfloat512.csv" --precision=BigFloat --prec=512 --k-range=2:8 --tfinal=1.0
 ```
 
-### 4. Use the optimized method files
+### Optimized Method Files
 
 Optimized JLD2 file stored with `DoubleFloats.DoubleFloat{Float64}` coefficients:
 
