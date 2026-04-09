@@ -8,10 +8,6 @@ It is a data-and-usage repository: the paper is still in preparation, but the ex
 
 Use this repository if you want **precomputed low-stage, high-order, and very-high-order explicit RK methods** for **smooth, nonstiff ODE initial value problems**, and you mainly need the final Butcher tableau data `A`, `b`, `c` plus a minimal Julia workflow to load and test them.
 
-This repository is **not a full solver package**. The included scripts focus on **fixed-step usage and convergence checks**. If your goal is stiffness handling, dense output, production solver features, or reconstructing the methods from scratch, this repository by itself is not enough.
-
-Adaptive control is part of the broader research direction and will be discussed in the paper, but this repository does not currently provide standalone adaptive-step example code.
-
 The **standard exported methods currently included here** have the following order-stage pairs:
 
 - order 4 with 4 stages
@@ -32,6 +28,10 @@ The **standard exported methods currently included here** have the following ord
 - accuracy-cost studies for very-high-order explicit methods
 - direct reuse in fixed-step research solvers
 - comparison between standard and optimized exported methods
+
+This repository is **not a full solver package**. The included scripts focus on **fixed-step usage and convergence checks**. If your goal is stiffness handling, dense output, production solver features, or reconstructing the methods from scratch, this repository by itself is not enough.
+
+Adaptive control is part of the broader research direction and will be discussed in the paper, but this repository does not currently provide standalone adaptive-step example code.
 
 ## What Problem This Repository Solves
 
