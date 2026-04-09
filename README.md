@@ -1,18 +1,18 @@
 # QDWithClustersMinimalV1 RK Tableaux
 
-This repository contains exported explicit Runge-Kutta tableaux from the research project:
+This repository contains **exported explicit Runge-Kutta tableaux** from the research project:
 
 `Low Stage High Order Explicit Runge--Kutta Methods via Q- and D-Conditions: General Theory and Efficient Recursive Construction`
 
-It is a data-and-usage repository: the paper is still in preparation, but the exported tableaux, file formats, and example scripts here are already usable.
+It is a data-and-usage repository: the paper is still in preparation, but the exported tableaux, file formats, and example scripts are already usable.
 
-Use this repository if you want precomputed low-stage, high-order, and very-high-order explicit RK methods for smooth, nonstiff ODE initial value problems, and you mainly need the final Butcher tableau data `A`, `b`, `c` plus a minimal Julia workflow to load and test them.
+Use this repository if you want **precomputed low-stage, high-order, and very-high-order explicit RK methods** for **smooth, nonstiff ODE initial value problems**, and you mainly need the final Butcher tableau data `A`, `b`, `c` plus a minimal Julia workflow to load and test them.
 
-This repository is not a full solver package. The included scripts focus on fixed-step usage and convergence checks. If your goal is stiffness handling, dense output, production solver features, or reconstructing the methods from scratch, this repository by itself is not enough.
+This repository is **not a full solver package**. The included scripts focus on **fixed-step usage and convergence checks**. If your goal is stiffness handling, dense output, production solver features, or reconstructing the methods from scratch, this repository by itself is not enough.
 
 Adaptive control is part of the broader research direction and will be discussed in the paper, but this repository does not currently provide standalone adaptive-step example code.
 
-The standard exported methods currently included here have the following order-stage pairs:
+The **standard exported methods currently included here** have the following order-stage pairs:
 
 - order 4 with 4 stages
 - order 6 with 8 stages
@@ -24,7 +24,7 @@ The standard exported methods currently included here have the following order-s
 - order 18 with 74 stages
 - order 20 with 92 stages
 
-Typical use cases:
+**Typical use cases:**
 
 - extremely high-accuracy time integration of smooth, nonstiff ODEs
 - time discretization matched to high-order spatial schemes
