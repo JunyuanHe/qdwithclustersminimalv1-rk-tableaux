@@ -80,7 +80,7 @@ julia scripts/use_exported_rk_tableau.jl --input="optimized methods/jld2/optimiz
 The corresponding CSV file is also available:
 
 ```bash
-julia scripts/use_exported_rk_tableau.jl --input="optimized methods/csv/optimized_rk_p8_s14_double64_trial2.csv" --precision=Float64 --k=4 --tfinal=1.0
+julia scripts/use_exported_rk_tableau.jl --input="optimized methods/csv/optimized_rk_p8_s14_double64_trial2.csv" --precision=Double64 --k=4 --tfinal=1.0
 ```
 
 ## Repository Layout
@@ -187,16 +187,18 @@ If omitted, the default is `2:8`.
 
 - `--precision=Float64`
 - `--precision=BigFloat`
+- `--precision=Double64`
 - `--prec=256`
 - `--prec=512`
 
 Notes:
 
 - `Float64` and `BigFloat` are Julia built-in numeric types. They do not require separate package installation.
+- `Double64` is provided by `DoubleFloats`. If needed, the scripts will automatically install and load `DoubleFloats`.
 - `--prec=...` is only relevant when using `BigFloat`.
 - for `csv` files, `--precision` controls how coefficients are parsed
 - for `jld2` files, omitting `--precision` means "use the coefficient type stored in the file"
-- for `jld2` files, if you explicitly pass `--precision=Float64` or `--precision=BigFloat`, the script converts the loaded tableau to that type before solving
+- for `jld2` files, if you explicitly pass `--precision=Float64`, `--precision=BigFloat`, or `--precision=Double64`, the script converts the loaded tableau to that type before solving
 
 ## Automatic Package Handling
 

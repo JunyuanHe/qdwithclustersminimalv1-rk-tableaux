@@ -23,7 +23,7 @@ function parse_number(::Type{BigFloat}, s::AbstractString)
 end
 
 function parse_number(::Type{T}, s::AbstractString) where {T}
-    return parse(T, s)
+    return Base.invokelatest(parse, T, s)
 end
 
 function pow2_step(::Type{T}, k::Int) where {T}
@@ -132,11 +132,14 @@ function parse_precision_name(precision_name::String)
         return Float64
     elseif precision_name == "BigFloat"
         return BigFloat
+    elseif precision_name == "Double64"
+        maybe_load_doublefloats()
+        return getfield(Base.loaded_modules[Base.PkgId(DOUBLEFLOATS_UUID, "DoubleFloats")], :Double64)
     else
         error(
             "Unsupported precision: $precision_name. " *
-            "This script supports only Julia built-in numeric types Float64 and BigFloat. " *
-            "No extra package installation is required for either of them."
+            "This script supports Float64, BigFloat, and Double64. " *
+            "Float64 and BigFloat are built into Julia. Double64 is provided by DoubleFloats and will be installed automatically if needed."
         )
     end
 end
@@ -257,6 +260,10 @@ function bootstrap_runtime_dependencies(args)
     options = parse_kv_args(args)
     input = get(options, "input", "")
     isempty(input) && error("Missing --input=path/to/tableau.csv or .jld2")
+
+    if get(options, "precision", "") == "Double64"
+        maybe_load_doublefloats()
+    end
 
     if endswith(lowercase(input), ".jld2")
         maybe_load_jld2()
